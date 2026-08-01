@@ -31,9 +31,10 @@ section[id] {
     justify-content: center;
     padding: 24px 16px;
     box-sizing: border-box;
+    background-color: #1c0d2b;
 }
 
-.hero img {
+.hero-image {
     position: absolute;
     inset: 0;
     display: block;
@@ -41,6 +42,13 @@ section[id] {
     height: 100%;
     object-fit: cover;
     object-position: center;
+    opacity: 0;
+    transition: opacity 220ms ease;
+    will-change: opacity;
+}
+
+.hero.is-image-loaded .hero-image {
+    opacity: 1;
 }
 
 /* Gradient animation */
