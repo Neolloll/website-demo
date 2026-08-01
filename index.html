@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Психо Паті 😈</title>
+    <link rel="preload" as="image" href="hero2.png" fetchpriority="high">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <section class="hero" id="hero">
-        <img src="hero2.png" alt="">
+        <img class="hero-image" src="hero2.png" alt="Психо Паті" loading="eager" decoding="async" fetchpriority="high">
         <div class="hero-inner">
             <h1 class="hero-title">Психо Паті</h1>
             <h2 class="hero-meta">23 Серпня 14:00 - 20:00, м. Харків</h2>
@@ -170,9 +171,19 @@
 
     <script>
         (function initHero() {
+            const hero = document.querySelector('.hero');
+            const heroImage = document.querySelector('.hero-image');
             const heroInner = document.querySelector('.hero-inner');
             const title = document.querySelector('.hero-title');
             if (!title || !heroInner) return;
+
+            if (hero && heroImage) {
+                if (heroImage.complete) {
+                    hero.classList.add('is-image-loaded');
+                } else {
+                    heroImage.addEventListener('load', () => hero.classList.add('is-image-loaded'), { once: true });
+                }
+            }
 
             const text = title.textContent.trim();
             const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
